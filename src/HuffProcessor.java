@@ -33,6 +33,7 @@ public class HuffProcessor {
 	public HuffProcessor(int debug) {
 		myDebugLevel = debug;
 	}
+	
 
 	/**
 	 * Compresses a file. Process must be reversible and loss-less.
@@ -88,6 +89,10 @@ public class HuffProcessor {
 		
 		if (root.myLeft == null && root.myRight == null) {
 	        encodings[root.myValue] = string;
+	        if(myDebugLevel >= DEBUG_HIGH) {
+	        	System.out.printf("encoding for %d is %s\n", 
+	        			root.myValue, string);
+	        }
 	        return;
 		}
 		codingHelper(root.myLeft, string + "0", encodings);
