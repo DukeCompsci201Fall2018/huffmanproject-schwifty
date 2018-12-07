@@ -56,12 +56,11 @@ public class HuffProcessor {
 		out.close();
 	}
 	private void writeCompressedBits(String[] codings, BitInputStream in, BitOutputStream out) {
-		char[] alpha = {'A','B','C','D','E','F','G','H','I',
-  			  'J','K','L','M','N','O','P','Q','R','S','T','U',
-  			  'V','W','X','Y','Z'};
-		for(char s:alpha) {
-			String code = codings[s];
-			out.writeBits(code.length(), Integer.parseInt(code,2));
+		while(true) {
+			int bit = in.readBits(BITS_PER_WORD);
+			if(bit == -1) break;
+				String code = codings[bit];
+				out.writeBits(code.length(), Integer.parseInt(code,2));
 		}
 		String code = codings[PSEUDO_EOF];
 		out.writeBits(code.length(), Integer.parseInt(code,2));
@@ -123,9 +122,9 @@ public class HuffProcessor {
 		int[] arr = new int[ALPH_SIZE + 1];
 		while(true) {
 			int bits = in.readBits(BITS_PER_WORD);
-			arr[bits]++;
 			if(bits == -1) break;
-		}
+			arr[bits]++;
+		}	
 		arr[PSEUDO_EOF] = 1;
 		return arr;
 	}
