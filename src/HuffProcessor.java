@@ -123,7 +123,7 @@ public class HuffProcessor {
 		int[] arr = new int[ALPH_SIZE + 1];
 		while(true) {
 			int bits = in.readBits(BITS_PER_WORD);
-			arr[bits] ++;
+			arr[bits]++;
 			if(bits == -1) break;
 		}
 		arr[PSEUDO_EOF] = 1;
@@ -178,7 +178,7 @@ public class HuffProcessor {
 		                       break;   // out of loop
 		                   else {
 		                       
-							out.writeBits(8,current.myValue);
+							out.writeBits(BITS_PER_WORD,current.myValue);
 		                    current = root; // start back after leaf
 		                   }
 		               }
