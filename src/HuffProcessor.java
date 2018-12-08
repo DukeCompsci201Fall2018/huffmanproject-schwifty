@@ -1,6 +1,6 @@
 import java.util.PriorityQueue;
 
-//Joe Heflin
+//Joe Heflin + Seth Tilliss
 /**
  * Although this class has a history of several years,
  * it is starting from a blank-slate, new and clean implementation
@@ -62,6 +62,7 @@ public class HuffProcessor {
 			if(bit == -1) break;
 				String code = codings[bit];
 				out.writeBits(code.length(), Integer.parseInt(code,2));
+			//System.out.printf(in, "wrote ", bit, "for", code.length(), "bits");	
 		}
 		String code = codings[PSEUDO_EOF];
 		out.writeBits(code.length(), Integer.parseInt(code,2));
@@ -154,7 +155,7 @@ public class HuffProcessor {
 			readCompressedBits(root,in,out);
 			out.close();
 		}
-		//method written by Joe
+		//method written by Joe + Seth
 		private void readCompressedBits(HuffNode root, BitInputStream in, BitOutputStream out) {
 				
 				
@@ -189,7 +190,7 @@ public class HuffProcessor {
 		           }
 		       }
 		}
-//		method edited by Joe
+//		method edited by Joe + Seth
 		private HuffNode readTreeHeader(BitInputStream in) {
 			
 			int bit = in.readBits(1);
